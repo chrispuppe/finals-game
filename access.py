@@ -18,30 +18,32 @@ import numpy as np
 # bron = [player for player in player_dict if player['full_name'] == 'LeBron James'][0]
 # bron_id = bron['id']
 
-player_input_name = 'Stephen Curry'
+
 
 # print(selected_player_id)
 # print(bron['full_name'] + ' Player ID: ' + str(bron_id))
 
 # find team Ids
 
-# teams = teams.get_teams()
-# team_input_name = 'Golden State Warriors'
-# print(teams)
-# GSW = [x for x in teams if x['full_name'] == team_input_name][0]
-# GSW_id = GSW['id']
+teams = teams.get_teams()
+team_input_name = 'Golden State Warriors'
+for team in teams:
+    print(team['full_name'])
+GSW = [x for x in teams if x['full_name'] == team_input_name][0]
+GSW_id = GSW['id']
 
 # print(GSW['full_name'] + ' Team ID: ' + str(GSW_id))
 
 #Call the API endpoint passing in lebron's ID & which season
- 
+
+player_input_name = 'Stephen Curry' 
 selected_year = '2021'
 finals_team_1 = 'GSW'
 finals_team_2 = 'DEN'
 
 def get_player_finals_stats(player_name):
     player_dict = players.get_players()
-    selected_player = [player for player in player_dict if player['full_name'] == f'{player_input_name}'][0]
+    selected_player = [player for player in player_dict if player['full_name'] == f'{player_name}'][0]
     selected_player_id = selected_player['id']
     gamelog_player_input = playergamelog.PlayerGameLog(
                                                         player_id=f'{selected_player_id}', 
@@ -80,27 +82,12 @@ def get_player_finals_stats(player_name):
             player_playoff_stats.append(player_game_stats)
     return player_playoff_stats
 
-print(get_player_finals_stats(player_input_name))
+# print(get_player_finals_stats(player_input_name))
 
+def get_team_players(team_input_name):
+    gamelog_player_input = playergamelog.PlayerGameLog(
+                                                    player_id=f'{selected_player_id}', 
+                                                    season_type_all_star='Playoffs', 
+                                                    season=selected_year)
+    df_player_input = gamelog_player_input.get_data_frames()[0]
 
-# labels = []
-# for game in df_player_input:
-#     labels.append(game)
-# df = pd.DataFrame(df_player_input, index=labels)
-
-# print("Select specific columns:")
-# print(df[['GAME_DATE', 'MATCHUP']])
-# print(df.loc[[0]])
-# If you want all seasons, you must import the SeasonAll parameter 
-
-
-# gamelog_player_input_all = playergamelog.PlayerGameLog(player_id='2544', season = SeasonAll.all)
-
-# df_bron_games_all = gamelog_player_input_all.get_data_frames()
-
-# for item in gamelog_player_input:
-#     print(item)
-
-#### Find players on specified team ####
-# all_teams = commonallplayers.CommonAllPlayers('TEAM_ID'==1610612744)
-# print(all_teams)
