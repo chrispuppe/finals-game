@@ -90,10 +90,21 @@ def get_player_finals_stats(player_name):
 # print(get_player_finals_stats(player_input_name))
 
 def get_team_players(team_name):
+    selected_team = [x for x in teams if x['full_name'] == team_name][0]
+    selected_team_id = selected_team['id']
     team_roster = []
     player_dict = players.get_players()
     for player in player_dict:
-        print(playerprofilev2.NextGame(player_id=f'{player}["player_id"]')[0])
+        selected_player_id = player['id']
+        player_next_game = playerprofilev2.PlayerProfileV2(player_id=f'{selected_player_id}')
+        df_player_next_game = player_next_game.get_data_frames()[14]
+        try:
+            if df_player_next_game.loc[0, 'PLAYER_TEAM_ID'] == selected_team_id:
+                team_roster.append(player)
+        except KeyError:
+            print(player)
+
+    return team_roster
 
     #     if 
     # [player for player in player_dict if player['full_name'] == f'{player_name}'][0]
