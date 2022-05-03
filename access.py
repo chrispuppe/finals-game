@@ -4,7 +4,7 @@
 # https://github.com/swar/nba_api/blob/master/docs/table_of_contents.md
 
 from nba_api.stats.static import players
-from nba_api.stats.endpoints import playergamelog, commonallplayers
+from nba_api.stats.endpoints import playergamelog, playerprofilev2
 import pandas as pd 
 from nba_api.stats.static import teams 
 from nba_api.stats.library.parameters import SeasonAll
@@ -27,8 +27,8 @@ import numpy as np
 
 teams = teams.get_teams()
 team_input_name = 'Golden State Warriors'
-for team in teams:
-    print(team['full_name'])
+# for team in teams:
+#     print(team['full_name'])
 GSW = [x for x in teams if x['full_name'] == team_input_name][0]
 GSW_id = GSW['id']
 
@@ -41,10 +41,15 @@ selected_year = '2021'
 finals_team_1 = 'GSW'
 finals_team_2 = 'DEN'
 
-def get_player_finals_stats(player_name):
+def get_player_id(player_name):
     player_dict = players.get_players()
     selected_player = [player for player in player_dict if player['full_name'] == f'{player_name}'][0]
     selected_player_id = selected_player['id']
+    return selected_player_id
+
+
+def get_player_finals_stats(player_name):
+    selected_player_id = get_player_id(player_name)
     gamelog_player_input = playergamelog.PlayerGameLog(
                                                         player_id=f'{selected_player_id}', 
                                                         season_type_all_star='Playoffs', 
@@ -84,10 +89,16 @@ def get_player_finals_stats(player_name):
 
 # print(get_player_finals_stats(player_input_name))
 
-def get_team_players(team_input_name):
-    gamelog_player_input = playergamelog.PlayerGameLog(
-                                                    player_id=f'{selected_player_id}', 
-                                                    season_type_all_star='Playoffs', 
-                                                    season=selected_year)
-    df_player_input = gamelog_player_input.get_data_frames()[0]
+def get_team_players(team_name):
+    team_roster = []
+    player_dict = players.get_players()
+    for player in player_dict:
+        print(playerprofilev2.NextGame(player_id=f'{player}["player_id"]')[0])
 
+    #     if 
+    # [player for player in player_dict if player['full_name'] == f'{player_name}'][0]
+    # [x for x in teams if x['full_name'] == team_input_name][0]
+    # playerprofilev2.NextGame(player_id=f'{player}')
+    # df_player_input = gamelog_player_input.get_data_frames()[0]
+
+get_team_players(team_input_name)
