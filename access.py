@@ -32,9 +32,6 @@ team_input_name = 'Golden State Warriors'
 GSW = [x for x in teams if x['full_name'] == team_input_name][0]
 GSW_id = GSW['id']
 
-# print(GSW['full_name'] + ' Team ID: ' + str(GSW_id))
-
-#Call the API endpoint passing in lebron's ID & which season
 
 player_input_name = 'Stephen Curry' 
 selected_year = '2021'
@@ -87,8 +84,6 @@ def get_player_finals_stats(player_name):
             player_playoff_stats.append(player_game_stats)
     return player_playoff_stats
 
-# print(get_player_finals_stats(player_input_name))
-
 def get_team_players(team_name):
     selected_team = [x for x in teams if x['full_name'] == team_name][0]
     selected_team_id = selected_team['id']
@@ -103,4 +98,4 @@ def get_team_players(team_name):
                 team_roster.append(player)
     return team_roster
 
-print(len(get_team_players(team_input_name)))
+print(get_team_players(team_input_name))
