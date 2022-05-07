@@ -4,7 +4,7 @@
 # https://github.com/swar/nba_api/blob/master/docs/table_of_contents.md
 
 from nba_api.stats.static import players
-from nba_api.stats.endpoints import playergamelog, playerprofilev2
+from nba_api.stats.endpoints import playergamelog, playerprofilev2, teamplayerdashboard
 import pandas as pd 
 from nba_api.stats.static import teams 
 from nba_api.stats.library.parameters import SeasonAll
@@ -92,24 +92,15 @@ def get_player_finals_stats(player_name):
 def get_team_players(team_name):
     selected_team = [x for x in teams if x['full_name'] == team_name][0]
     selected_team_id = selected_team['id']
-    team_roster = []
     player_dict = players.get_players()
-    for player in player_dict:
-        selected_player_id = player['id']
-        player_next_game = playerprofilev2.PlayerProfileV2(player_id=f'{selected_player_id}')
-        df_player_next_game = player_next_game.get_data_frames()[14]
-        try:
-            if df_player_next_game.loc[0, 'PLAYER_TEAM_ID'] == selected_team_id:
+    team_roster = []
+    players_on_team = teamplayerdashboard.TeamPlayerDashboard(team_id=f'{selected_team_id}')
+    df_players_on_team = players_on_team.get_data_frames()[1]
+    number_of_players = len(df_players_on_team)
+    for i in range(0, number_of_players):
+        for player in player_dict:
+            if player['id'] == df_players_on_team.loc[i,'PLAYER_ID']:
                 team_roster.append(player)
-        except KeyError:
-            print(player)
-
     return team_roster
 
-    #     if 
-    # [player for player in player_dict if player['full_name'] == f'{player_name}'][0]
-    # [x for x in teams if x['full_name'] == team_input_name][0]
-    # playerprofilev2.NextGame(player_id=f'{player}')
-    # df_player_input = gamelog_player_input.get_data_frames()[0]
-
-get_team_players(team_input_name)
+print(len(get_team_players(team_input_name)))
