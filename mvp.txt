@@ -1,0 +1,12 @@
+MVP features:
+Uses an api to collect NBA players, teams, and stats.
+Allows an admin to choose players for users in each game in the finals series.
+Shows the chosen players game stats from the API.
+Shows a dashboard for all users to see how the players did and what their resulting scores were from the game.
+Admin choose teams and game dates.
+Admin sign in page.
+
+**********************************************************************
+Strech features for the future:
+Allow users to sign in and select their own players in their allowed order.
+
