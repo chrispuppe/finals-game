@@ -9,6 +9,32 @@ Fantasy Finals
     <div class="jumbotron">
       <div class="container">
         <h1>Hello, world!</h1>
+        <table border="1" class="dataframe data">
+        <thead>
+          <tr style="text-align: right;">
+            <th>Date</th>
+            <th>PTS</th>
+            <th>REB</th>
+            <th>AST</th>
+            <th>STL</th>
+            <th>BLK</th>
+            <th>TOT</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for game in steph %}
+          <tr>
+            <th>{{game[7]}}</th>
+            <td>{{game[1]}}</td>
+            <td>{{game[2]}}</td>
+            <td>{{game[3]}}</td>
+            <td>{{game[4]}}</td>
+            <td>{{game[5]}}</td>
+            <td>{{game[6]}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
         <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
       </div>

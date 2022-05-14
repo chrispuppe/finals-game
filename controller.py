@@ -100,5 +100,5 @@ def get_team_players(team_name):
 
 selected_team_roster = get_team_players(team_input_name)
 
-for player in selected_team_roster:
-    print(f"Player: {player['full_name']} ID: {player['id']} ")
+# for player in selected_team_roster:
+#     print(f"Player: {player['full_name']} ID: {player['id']} ")
