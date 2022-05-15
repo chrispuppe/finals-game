@@ -2,12 +2,13 @@ from flask import Flask, render_template, url_for, session, redirect
 import numpy as np
 import controller
 from flask_debugtoolbar import DebugToolbarExtension
+import secrets
 # import pandas as pd
 
 app = Flask(__name__)
 
 app.debug = True
-app.config['SECRET_KEY'] = 'This is just a test for a demo of my app'
+app.config['SECRET_KEY'] = secrets.token_urlsafe(24)
 toolbar = DebugToolbarExtension(app)
 
 user_list = ['Andrew', 'Chris', 'Jake', 'Todd']
