@@ -12,31 +12,18 @@ import numpy as np
 
 
 
-# print(player_dict)
-# Use ternary operator or write function 
-# Names are case sensitive
-# bron = [player for player in player_dict if player['full_name'] == 'LeBron James'][0]
-# bron_id = bron['id']
-
-
-
-# print(selected_player_id)
-# print(bron['full_name'] + ' Player ID: ' + str(bron_id))
-
-# find team Ids
-
 teams = teams.get_teams()
 team_input_name = 'Golden State Warriors'
-# for team in teams:
-#     print(team['full_name'])
-GSW = [x for x in teams if x['full_name'] == team_input_name][0]
-GSW_id = GSW['id']
+# GSW = [x for x in teams if x['full_name'] == team_input_name][0]
+# GSW_id = GSW['id']
 
 
 player_input_name = 'Stephen Curry' 
 selected_year = '2021'
 finals_team_1 = 'GSW'
-finals_team_2 = 'DEN'
+finals_team_2 = 'MEM'
+
+finals_game_dates = ['APR 27, 2022', 'APR 24, 2022', 'APR 21, 2022 	']
 
 def get_player_id(player_name):
     player_dict = players.get_players()
@@ -85,20 +72,28 @@ def get_player_finals_stats(player_name):
     return player_playoff_stats
 
 def get_team_players(team_name):
-    selected_team = [x for x in teams if x['full_name'] == team_name][0]
+    
+    selected_team = [x for x in teams if x['abbreviation'] == team_name][0]
     selected_team_id = selected_team['id']
     player_dict = players.get_players()
     team_roster = []
     players_on_team = teamplayerdashboard.TeamPlayerDashboard(team_id=f'{selected_team_id}')
     df_players_on_team = players_on_team.get_data_frames()[1]
     number_of_players = len(df_players_on_team)
+
     for i in range(0, number_of_players):
         for player in player_dict:
             if player['id'] == df_players_on_team.loc[i,'PLAYER_ID']:
                 team_roster.append(player)
     return team_roster
 
-selected_team_roster = get_team_players(team_input_name)
+def get_finals_players(team1, team2):
+    team1_roster = get_team_players(team1)
+    team2_roster = get_team_players(team2)
+    finals_players = team1_roster + team2_roster
+    return finals_players
 
-# for player in selected_team_roster:
+finals_roster = get_finals_players(finals_team_1, finals_team_2)
+
+# for player in finals_roster:
 #     print(f"Player: {player['full_name']} ID: {player['id']} ")

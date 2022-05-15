@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+Fantasy Finals
+{% endblock %}
+
+{% block content %}
+    
+
+    <label for="players">Choose a player:</label>
+    <select name="players" id="cars">
+        <option value="" disabled selected>Select a player</option>
+    {% for player in player_list %}
+        <option value="{{ player['id'] }}">{{ player['full_name'] }}</option>
+    {% endfor %}
+    </select> 
+
+{% endblock %}
