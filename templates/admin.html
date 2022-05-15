@@ -5,10 +5,17 @@ Fantasy Finals
 {% endblock %}
 
 {% block content %}
-    
+
+    <label for="user">Choose a user:</label>
+    <select name="players" id="user">
+        <option value="" disabled selected>Select a user</option>
+    {% for user in users %}
+        <option value="{{ user }}">{{ user }}</option>
+    {% endfor %}
+    </select> 
 
     <label for="players">Choose a player:</label>
-    <select name="players" id="cars">
+    <select name="players" id="player">
         <option value="" disabled selected>Select a player</option>
     {% for player in player_list %}
         <option value="{{ player['id'] }}">{{ player['full_name'] }}</option>

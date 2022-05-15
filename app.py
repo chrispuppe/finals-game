@@ -1,9 +1,16 @@
 from flask import Flask, render_template, url_for, session, redirect
 import numpy as np
 import controller
+from flask_debugtoolbar import DebugToolbarExtension
 # import pandas as pd
 
 app = Flask(__name__)
+
+app.debug = True
+app.config['SECRET_KEY'] = 'This is just a test for a demo of my app'
+toolbar = DebugToolbarExtension(app)
+
+user_list = ['Andrew', 'Chris', 'Jake', 'Todd']
 
 @app.route('/')
 @app.route('/index')
@@ -15,7 +22,8 @@ def home():
 @app.route('/admin')
 def admin():
     player_list = controller.finals_roster
-    return render_template('admin.html', player_list=player_list)
+    users = user_list
+    return render_template('admin.html', player_list=player_list, users=users)
 
 if __name__ == '__main__':
     app.run(debug=True)
