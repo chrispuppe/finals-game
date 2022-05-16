@@ -17,8 +17,14 @@ user_list = ['Andrew', 'Chris', 'Jake', 'Todd']
 @app.route('/index')
 def home():
     # updated_game_stats = all_player_selected_by_users()
-    steph=controller.get_player_finals_stats('Stephen Curry')
-    return render_template('index.html', steph=steph)
+    user_choices = controller.all_user_selections
+    game_data = []
+    for choice in user_choices:
+        selected_player = controller.get_player_finals_stats(choice[0])
+        selected_player.append(choice[2])
+        game_data.append(selected_player)
+    # steph=controller.get_player_finals_stats('Stephen Curry')
+    return render_template('index.html', game_data=game_data)
 
 @app.route('/admin')
 def admin():

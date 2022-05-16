@@ -12,6 +12,8 @@ Fantasy Finals
         <table border="1" class="dataframe data">
         <thead>
           <tr style="text-align: right;">
+            <th>User</th>
+            <th>Player Name</th>
             <th>Date</th>
             <th>PTS</th>
             <th>REB</th>
@@ -22,9 +24,11 @@ Fantasy Finals
           </tr>
         </thead>
         <tbody>
-        {% for game in steph %}
+        {% for game in game_data %}
           <tr>
-            <th>{{game[7]}}</th>
+            <th>User</th>
+            <td>{{game[0]}}</td>
+            <td>{{game[7]}}</td>
             <td>{{game[1]}}</td>
             <td>{{game[2]}}</td>
             <td>{{game[3]}}</td>
@@ -35,7 +39,7 @@ Fantasy Finals
         {% endfor %}
       </tbody>
     </table>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p></p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
       </div>
     </div>
@@ -45,7 +49,7 @@ Fantasy Finals
       <div class="row">
         <div class="col-md-4">
           <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p>{{ game_data }}</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">

@@ -23,7 +23,12 @@ selected_year = '2021'
 finals_team_1 = 'GSW'
 finals_team_2 = 'MEM'
 
-finals_game_dates = ['APR 27, 2022', 'APR 24, 2022', 'APR 21, 2022 	']
+finals_game_dates = ['MAY 01, 2022', 'MAY 03, 2022', 'MAY 13, 2022']
+
+user_selection_1 = ['Stephen Curry', 'MAY 13, 2022', 'Chris']
+user_selection_2 = ['Stephen Curry', 'MAY 13, 2022', 'Andrew']
+
+all_user_selections = [user_selection_1, user_selection_2]
 
 def get_player_id(player_name):
     player_dict = players.get_players()
