@@ -4,10 +4,9 @@
 # https://github.com/swar/nba_api/blob/master/docs/table_of_contents.md
 
 from nba_api.stats.static import players
-from nba_api.stats.endpoints import playergamelog, playerprofilev2, teamplayerdashboard
+from nba_api.stats.endpoints import playergamelog, teamplayerdashboard
 import pandas as pd 
 from nba_api.stats.static import teams 
-from nba_api.stats.library.parameters import SeasonAll
 import numpy as np
 
 
