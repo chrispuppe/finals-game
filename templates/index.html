@@ -24,17 +24,17 @@ Fantasy Finals
           </tr>
         </thead>
         <tbody>
-        {% for game in game_data %}
+        {% for game in updated_scoreboard %}
           <tr>
-            <th>User</th>
-            <td>{{game[0]}}</td>
-            <td>{{game[7]}}</td>
-            <td>{{game[1]}}</td>
-            <td>{{game[2]}}</td>
-            <td>{{game[3]}}</td>
-            <td>{{game[4]}}</td>
-            <td>{{game[5]}}</td>
-            <td>{{game[6]}}</td>
+            <th>{{game['User']}}</th>
+            <td>{{game['Player Name']}}</td>
+            <td>{{game['Date']}}</td>
+            <td>{{game['PTS']}}</td>
+            <td>{{game['REB']}}</td>
+            <td>{{game['AST']}}</td>
+            <td>{{game['STL']}}</td>
+            <td>{{game['BLK']}}</td>
+            <td>{{game['TOT']}}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -49,7 +49,7 @@ Fantasy Finals
       <div class="row">
         <div class="col-md-4">
           <h2>Heading</h2>
-          <p>{{ game_data }}</p>
+          <p></p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
