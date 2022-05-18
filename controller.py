@@ -19,8 +19,8 @@ team_input_name = 'Golden State Warriors'
 
 player_input_name = 'Stephen Curry' 
 selected_year = '2021'
-finals_team_1 = 'GSW'
-finals_team_2 = 'MEM'
+finals_team_1 = 'Golden State Warriors'
+finals_team_2 = 'Memphis Grizzlies'
 
 finals_game_dates = ['MAY 01, 2022', 'MAY 03, 2022', 'MAY 13, 2022']
 
@@ -80,11 +80,14 @@ def get_player_finals_stats(player_name):
 
 def get_team_players(team_name):
     
-    selected_team = [x for x in teams if x['abbreviation'] == team_name][0]
+    selected_team = [x for x in teams if x['full_name'] == team_name][0]
     selected_team_id = selected_team['id']
     player_dict = players.get_players()
     team_roster = []
-    players_on_team = teamplayerdashboard.TeamPlayerDashboard(team_id=f'{selected_team_id}')
+    players_on_team = teamplayerdashboard.TeamPlayerDashboard(
+                                                                team_id=f'{selected_team_id}',
+                                                                season_type_all_star='Playoffs'
+                                                                )
     df_players_on_team = players_on_team.get_data_frames()[1]
     number_of_players = len(df_players_on_team)
 
@@ -97,22 +100,26 @@ def get_team_players(team_name):
 def get_finals_players(team1, team2):
     team1_roster = get_team_players(team1)
     team2_roster = get_team_players(team2)
-    finals_players = team1_roster + team2_roster
+    finals_players = [
+                        {'Team Name': team1, 'Roster': team1_roster},
+                        {'Team Name': team2, 'Roster': team2_roster}
+    ]
     return finals_players
 
 finals_roster = get_finals_players(finals_team_1, finals_team_2)
 
 def scoreboard():
-        user_choices = all_user_selections
-        game_data = []
-        for choice in user_choices:
-            selected_player = get_player_finals_stats(choice[0])
-            selected_date = choice[1]
-            for player_game in selected_player:
-                if selected_date == player_game['Date']:
-                    player_game.update({'User': choice[2]})
-                    game_data.append(player_game)
-        return game_data
+    user_choices = all_user_selections
+    game_data = []
+    for choice in user_choices:
+        selected_player = get_player_finals_stats(choice[0])
+        selected_date = choice[1]
+        for player_game in selected_player:
+            if selected_date == player_game['Date']:
+                player_game.update({'User': choice[2]})
+                game_data.append(player_game)
+    return game_data
 
 # for player in finals_roster:
 #     print(f"Player: {player['full_name']} ID: {player['id']} ")
+# print(teams)

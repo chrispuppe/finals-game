@@ -19,9 +19,9 @@ def home():
 
 @app.route('/admin')
 def admin():
-    player_list = finals_roster
+    team_list = finals_roster
     users = user_list
-    return render_template('admin.html', player_list=player_list, users=users)
+    return render_template('admin.html', team_list=team_list, users=users)
 
 if __name__ == '__main__':
     app.run(debug=True)

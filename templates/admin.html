@@ -17,8 +17,12 @@ Fantasy Finals
     <label for="players">Choose a player:</label>
     <select name="players" id="player">
         <option value="" disabled selected>Select a player</option>
-    {% for player in player_list %}
-        <option value="{{ player['id'] }}">{{ player['full_name'] }}</option>
+    {% for team in team_list %}
+        <optgroup label="{{ team['Team Name'] }}">
+        {% for player in team['Roster'] %}
+            <option value="{{ player['id'] }}">{{ player['full_name'] }}</option>
+        {% endfor %}
+        </optgroup>
     {% endfor %}
     </select> 
 
