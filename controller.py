@@ -103,7 +103,7 @@ def get_finals_players(team1, team2):
     finals_players = [
                         {'Team Name': team1, 'Roster': team1_roster},
                         {'Team Name': team2, 'Roster': team2_roster}
-    ]
+                    ]
     return finals_players
 
 finals_roster = get_finals_players(finals_team_1, finals_team_2)
