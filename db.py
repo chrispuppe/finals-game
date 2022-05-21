@@ -25,3 +25,7 @@ class Selection(db.Model):
     game_date = db.Column(db.String(80), unique=True, nullable=False)
     selected_player = db.Column(db.String(80), unique=True, nullable=False)
     user_selection_order = db.Column(db.Integer, nullable=False)
+
+db.drop_all() # make sure to remove this in production
+db.create_all()
+
