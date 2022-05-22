@@ -33,15 +33,6 @@ class Selection(db.Model):
         self.selected_player = selected_player
         self.user_selection_order = user_selection_order
 
-def new_selection():
-    selected_info = Selection(
-                                user_id=1,
-                                game_date='MAY 20, 2022',
-                                selected_player='Stephen Curry',
-                                user_selection_order=1
-    )
-    db.session.add(selected_info)
-    db.session.commit()
 
 db.drop_all() # make sure to remove this in production
 db.create_all()
@@ -57,7 +48,5 @@ db.session.add(chris)
 db.session.add(todd)
 db.session.add(anddrew)
 db.session.add(jake)
-
-# db.session.add(new_selection)
 
 db.session.commit()
