@@ -24,6 +24,16 @@ finals_team_2 = 'Dallas Mavericks'
 
 finals_game_dates = ['MAY 18, 2022', 'MAY 20, 2022', 'MAY 13, 2022']
 
+real_finals_dates = [
+                        'JUN 02, 2022',
+                        'JUN 05, 2022',
+                        'JUN 08, 2022',
+                        'JUN 10, 2022',
+                        'JUN 13, 2022',
+                        'JUN 16, 2022'
+                        'JUN 19, 2022'
+                        ]
+
 user_list = ['Andrew', 'Chris', 'Jake', 'Todd']
 
 user_selection_1 = ['Stephen Curry', 'MAY 18, 2022', 'Chris', 1]
