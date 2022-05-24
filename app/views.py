@@ -2,8 +2,8 @@ from flask import Flask, render_template, session, redirect, request, url_for
 from app.controller import scoreboard, finals_roster, user_list, finals_game_dates
 # from flask_debugtoolbar import DebugToolbarExtension
 # import secrets
-# from app.models import new_selection
-from app import app, models
+from app.models import User, Selection
+from app import app, db
 # from app import models
 
 
@@ -30,14 +30,16 @@ def admin():
     
     if request.method == 'POST':
         # new_selection()
-        # new_selection = Selection(
-        #                                 user_id=1,
-        #                                 game_date='MAY 20, 2022',
-        #                                 selected_player='Stephen Curry',
-        #                                 user_selection_order=1
-        #                                 )
-        # db.session.add(new_selection)
-        # db.session.commit()
+        new_selection = Selection(
+                                        user_id=1,
+                                        game_date='MAY 20, 2022',
+                                        selected_player='Stephen Curry',
+                                        user_selection_order=1
+                                        )
+        db.session.add(new_selection)
+        db.session.commit()
+        choice1 = Selection.query.all()
+        print(choice1)
         return redirect(url_for('admin'))
 
 @app.route('/select-teams')

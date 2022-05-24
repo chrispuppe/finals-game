@@ -18,8 +18,8 @@ class User(UserMixin, db.Model):
 class Selection(db.Model):
     selection_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey('user.user_id'), nullable=False)
-    game_date = db.Column(db.String(80), unique=True, nullable=False)
-    selected_player = db.Column(db.String(80), unique=True, nullable=False)
+    game_date = db.Column(db.String(80), nullable=False)
+    selected_player = db.Column(db.String(80), nullable=False)
     user_selection_order = db.Column(db.Integer, nullable=False)
 
     def __init__(self, user_id, game_date, 
