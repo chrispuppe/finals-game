@@ -144,11 +144,27 @@ def scoreboard():
     user_choices = all_user_selections()
     game_data = []
     for choice in user_choices:
+        choice_count = 0
         selected_player = get_player_finals_stats(choice[0])
         selected_date = choice[1]
+        selected_user = choice[2]
         for player_game in selected_player:
             if selected_date == player_game['Date']:
-                player_game.update({'User': choice[2]})
+                player_game.update({'User': selected_user})
                 game_data.append(player_game)
+                choice_count += 1
+        if choice_count == 0:
+            player_game = {
+                'Player Name': choice[0],
+                'PTS': 0,
+                'REB': 0,
+                'AST': 0,
+                'STL': 0,
+                'BLK': 0,
+                'TOT': 0,
+                'Date': selected_date,
+                'User': selected_user
+            }
+            game_data.append(player_game)
     return game_data
 

@@ -22,8 +22,7 @@ class Selection(db.Model):
     selected_player = db.Column(db.String(80), nullable=False)
 
     def __init__(self, user_id, game_date, 
-                selected_player, user_selection_order):
+                selected_player):
         self.user_id = user_id
         self.game_date = game_date
         self.selected_player = selected_player
-        self.user_selection_order = user_selection_order

@@ -8,7 +8,6 @@ from app import app, db
 @app.route('/index')
 def home():
     updated_scoreboard = scoreboard()
-    print(updated_scoreboard)
     return render_template('index.html', updated_scoreboard=updated_scoreboard)
 
 @app.route('/admin', methods=['GET', 'POST'])
@@ -23,12 +22,10 @@ def admin():
         new_selection = Selection(
                                     user_id=request.form['user'],
                                     game_date=request.form['game-day'],
-                                    selected_player=request.form['player'],
-                                    user_selection_order=1
+                                    selected_player=request.form['player']
                                     )
         db.session.add(new_selection)
         db.session.commit()
-
         return redirect(url_for('admin'))
 
 @app.route('/select-teams')
