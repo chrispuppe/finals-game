@@ -21,7 +21,15 @@ selected_year = '2021'
 finals_team_1 = 'Golden State Warriors'
 finals_team_2 = 'Dallas Mavericks'
 
-finals_game_dates = ['MAY 18, 2022', 'MAY 20, 2022', 'MAY 13, 2022']
+finals_game_dates = [
+                        'MAY 18, 2022',
+                        'MAY 20, 2022',
+                        'MAY, 22 2022',
+                        'MAY, 24 2022',
+                        'MAY, 26 2022',
+                        'MAY, 28 2022',
+                        'MAY, 30 2022'
+                        ]
 
 real_finals_dates = [
                         'JUN 02, 2022',
