@@ -1,17 +1,8 @@
 from flask import Flask, render_template, session, redirect, request, url_for
 from app.controller import scoreboard, finals_roster, user_list, finals_game_dates
-# from flask_debugtoolbar import DebugToolbarExtension
-# import secrets
 from app.models import User, Selection
 from app import app, db
-# from app import models
 
-
-# app = Flask(__name__)
-
-# app.debug = True
-# app.config['SECRET_KEY'] = secrets.token_urlsafe(24)
-# toolbar = DebugToolbarExtension(app)
 
 @app.route('/')
 @app.route('/index')
@@ -29,17 +20,15 @@ def admin():
         return render_template('admin.html', team_list=team_list, users=users, game_dates=game_dates)
     
     if request.method == 'POST':
-        # new_selection()
         new_selection = Selection(
-                                        user_id=1,
-                                        game_date='MAY 20, 2022',
-                                        selected_player='Stephen Curry',
-                                        user_selection_order=1
-                                        )
+                                    user_id=request.form['user'],
+                                    game_date=request.form['game-day'],
+                                    selected_player=request.form['player'],
+                                    user_selection_order=1
+                                    )
         db.session.add(new_selection)
         db.session.commit()
-        choice1 = Selection.query.all()
-        print(choice1)
+
         return redirect(url_for('admin'))
 
 @app.route('/select-teams')

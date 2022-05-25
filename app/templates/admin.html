@@ -16,7 +16,7 @@ Admin
             <select name="user" id="user">
                 <option value="" disabled selected>Select a user</option>
             {% for user in users %}
-                <option value="{{ user }}">{{ user }}</option>
+                <option value="{{ user['user_id'] }}">{{ user['username'] }}</option>
             {% endfor %}
             </select>
 
@@ -26,7 +26,7 @@ Admin
             {% for team in team_list %}
                 <optgroup label="{{ team['Team Name'] }}">
                 {% for player in team['Roster'] %}
-                    <option value="{{ player['id'] }}">{{ player['full_name'] }}</option>
+                    <option value="{{ player['full_name'] }}">{{ player['full_name'] }}</option>
                 {% endfor %}
                 </optgroup>
             {% endfor %}

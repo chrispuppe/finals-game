@@ -17,7 +17,7 @@ team_input_name = 'Golden State Warriors'
 # GSW_id = GSW['id']
 
 
-player_input_name = 'Stephen Curry' 
+player_input_name = 'Stephen Curry'
 selected_year = '2021'
 finals_team_1 = 'Golden State Warriors'
 finals_team_2 = 'Dallas Mavericks'
@@ -34,7 +34,12 @@ real_finals_dates = [
                         'JUN 19, 2022'
                         ]
 
-user_list = ['Andrew', 'Chris', 'Jake', 'Todd']
+user_list = [
+    {'username': 'Andrew', 'user_id': 1},
+    {'username': 'Chris', 'user_id': 2},
+    {'username': 'Jake', 'user_id': 3},
+    {'username': 'Todd', 'user_id': 4}
+    ]
 
 user_selection_1 = ['Stephen Curry', 'MAY 18, 2022', 'Chris', 1]
 user_selection_2 = ['Luka Doncic', 'MAY 18, 2022', 'Andrew', 1]
