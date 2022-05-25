@@ -54,7 +54,12 @@ def all_user_selections():
     all_db_selections = Selection.query.all()
     for selection in all_db_selections:
         selection_username = db.session.query(User).get(selection.user_id).username
-        selection_arr = [selection.selected_player, selection.game_date, selection_username]
+        selection_arr = [
+                            selection.selected_player,
+                            selection.game_date,
+                            selection_username,
+                            selection.selection_id
+                            ]
         user_selections.append(selection_arr)
     return user_selections
 
@@ -148,9 +153,11 @@ def scoreboard():
         selected_player = get_player_finals_stats(choice[0])
         selected_date = choice[1]
         selected_user = choice[2]
+        seleted_id = choice[3]
         for player_game in selected_player:
             if selected_date == player_game['Date']:
                 player_game.update({'User': selected_user})
+                player_game.update({'Selection_id': seleted_id})
                 game_data.append(player_game)
                 choice_count += 1
         if choice_count == 0:
@@ -163,7 +170,8 @@ def scoreboard():
                 'BLK': 0,
                 'TOT': 0,
                 'Date': selected_date,
-                'User': selected_user
+                'User': selected_user,
+                'Selection_id': seleted_id
             }
             game_data.append(player_game)
     return game_data

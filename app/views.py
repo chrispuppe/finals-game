@@ -16,7 +16,14 @@ def admin():
         team_list = finals_roster
         users = user_list()
         game_dates = finals_game_dates
-        return render_template('admin.html', team_list=team_list, users=users, game_dates=game_dates)
+        updated_scoreboard = scoreboard()
+        return render_template(
+                                'admin.html',
+                                team_list=team_list,
+                                users=users,
+                                game_dates=game_dates,
+                                updated_scoreboard=updated_scoreboard
+                                )
     
     if request.method == 'POST':
         new_selection = Selection(
@@ -27,6 +34,13 @@ def admin():
         db.session.add(new_selection)
         db.session.commit()
         return redirect(url_for('admin'))
+
+@app.route('/delete-selection/<int:id>', methods= ['GET', 'POST'])
+def delete_selection(id):
+    delete_selection = Selection.query.get(id)
+    db.session.delete(delete_selection)
+    db.session.commit()
+    return redirect(url_for('admin'))
 
 @app.route('/select-teams')
 def team_selection():
