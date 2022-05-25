@@ -8,15 +8,14 @@ from nba_api.stats.endpoints import playergamelog, teamplayerdashboard
 import pandas as pd 
 from nba_api.stats.static import teams 
 import numpy as np
+from app.models import User, Selection
+from app import db
 
 
 
 teams = teams.get_teams()
+
 team_input_name = 'Golden State Warriors'
-# GSW = [x for x in teams if x['full_name'] == team_input_name][0]
-# GSW_id = GSW['id']
-
-
 player_input_name = 'Stephen Curry'
 selected_year = '2021'
 finals_team_1 = 'Golden State Warriors'
@@ -34,18 +33,30 @@ real_finals_dates = [
                         'JUN 19, 2022'
                         ]
 
-user_list = [
-    {'username': 'Andrew', 'user_id': 1},
-    {'username': 'Chris', 'user_id': 2},
-    {'username': 'Jake', 'user_id': 3},
-    {'username': 'Todd', 'user_id': 4}
-    ]
 
-user_selection_1 = ['Stephen Curry', 'MAY 18, 2022', 'Chris', 1]
-user_selection_2 = ['Luka Doncic', 'MAY 18, 2022', 'Andrew', 1]
-user_selection_3 = ['Klay Thompson', 'MAY 18, 2022', 'Todd', 1]
+def user_list():
+    users = []
+    all_db_users = User.query.all()
+    for user in all_db_users:
+        user_dict = {'username': user.username, 'user_id': user.user_id}
+        users.append(user_dict)
+    sortedByName = sorted(users, key=lambda x: x['username'])
+    return sortedByName
 
-all_user_selections = [user_selection_1, user_selection_2, user_selection_3]
+# user_selection_1 = ['Stephen Curry', 'MAY 18, 2022', 'Chris', 1]
+# user_selection_2 = ['Luka Doncic', 'MAY 18, 2022', 'Andrew', 1]
+# user_selection_3 = ['Klay Thompson', 'MAY 18, 2022', 'Todd', 1]
+
+# all_user_selections = [user_selection_1, user_selection_2, user_selection_3]
+
+def all_user_selections():
+    user_selections = []
+    all_db_selections = Selection.query.all()
+    for selection in all_db_selections:
+        selection_username = db.session.query(User).get(selection.user_id).username
+        selection_arr = [selection.selected_player, selection.game_date, selection_username]
+        user_selections.append(selection_arr)
+    return user_selections
 
 def get_player_id(player_name):
     player_dict = players.get_players()
@@ -130,7 +141,7 @@ def get_finals_players(team1, team2):
 finals_roster = get_finals_players(finals_team_1, finals_team_2)
 
 def scoreboard():
-    user_choices = all_user_selections
+    user_choices = all_user_selections()
     game_data = []
     for choice in user_choices:
         selected_player = get_player_finals_stats(choice[0])
@@ -141,7 +152,3 @@ def scoreboard():
                 game_data.append(player_game)
     return game_data
 
-# for player in finals_roster:
-#     print(f"Player: {player['full_name']} ID: {player['id']} ")
-# for team in teams:
-#     print(team)

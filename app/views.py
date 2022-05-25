@@ -15,7 +15,7 @@ def home():
 def admin():
     if request.method == 'GET':
         team_list = finals_roster
-        users = user_list
+        users = user_list()
         game_dates = finals_game_dates
         return render_template('admin.html', team_list=team_list, users=users, game_dates=game_dates)
     

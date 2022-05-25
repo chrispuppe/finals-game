@@ -27,7 +27,6 @@ class Selection(db.Model):
     user_id = db.Column(db.Integer, ForeignKey('user.user_id'), nullable=False)
     game_date = db.Column(db.String(80), nullable=False)
     selected_player = db.Column(db.String(80), nullable=False)
-    user_selection_order = db.Column(db.Integer, nullable=False)
 
     def __init__(self, user_id, game_date, 
                 selected_player, user_selection_order):
