@@ -18,17 +18,17 @@ teams = teams.get_teams()
 # team_input_name = 'Golden State Warriors'
 # player_input_name = 'Stephen Curry'
 selected_year = '2021'
-finals_team_1 = 'Golden State Warriors'
-finals_team_2 = 'Dallas Mavericks'
+finals_team_1 = 'Miami Heat'
+finals_team_2 = 'Boston Celtics'
 
 finals_game_dates = [
-                        'MAY 18, 2022',
-                        'MAY 20, 2022',
-                        'MAY, 22 2022',
-                        'MAY, 24 2022',
-                        'MAY, 26 2022',
-                        'MAY, 28 2022',
-                        'MAY, 30 2022'
+                        'MAY 17, 2022',
+                        'MAY 19, 2022',
+                        'MAY 22, 2022',
+                        'MAY 21, 2022',
+                        'MAY 25, 2022',
+                        'MAY 27, 2022',
+                        'MAY 29, 2022'
                         ]
 
 real_finals_dates = [
@@ -164,6 +164,7 @@ def scoreboard():
         seleted_id = choice[3]
         for player_game in selected_player:
             if selected_date == player_game['Date']:
+                print(player_game)
                 player_game.update({'User': selected_user})
                 player_game.update({'Selection_id': seleted_id})
                 game_data.append(player_game)
