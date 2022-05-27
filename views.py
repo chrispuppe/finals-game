@@ -8,7 +8,10 @@ from __init__ import app, db
 @app.route('/index')
 def home():
     updated_scoreboard = scoreboard()
-    return render_template('index.html', updated_scoreboard=updated_scoreboard)
+    return render_template(
+                            'index.html', 
+                            updated_scoreboard=updated_scoreboard
+                            )
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
