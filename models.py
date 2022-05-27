@@ -17,8 +17,15 @@ class User(UserMixin, db.Model):
 
 class Selection(db.Model):
     selection_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, ForeignKey('user.user_id'), nullable=False)
-    game_date = db.Column(db.String(80), nullable=False)
+    user_id = db.Column(
+                            db.Integer, 
+                            ForeignKey('user.user_id'), 
+                            nullable=False
+                            )
+    game_date = db.Column(
+                            db.String(80), 
+                            nullable=False
+                            )
     selected_player = db.Column(db.String(80), nullable=False)
 
     def __init__(self, user_id, game_date, 
@@ -31,10 +38,26 @@ if __name__ == "__main__":
     db.drop_all()
     db.create_all()
 
-    chris = User(username='Chris', email='chrispuppe@gmail.com', password='passowrd')
-    todd = User(username='Todd', email='tb@gmail.com', password='passowrd')
-    anddrew = User(username='Andrew', email='as@gmail.com', password='passowrd')
-    jake = User(username='Jake', email='jo@gmail.com', password='passowrd')
+    chris = User(
+                    username='Chris', 
+                    email='chrispuppe@gmail.com', 
+                    password='passowrd'
+                    )
+    todd = User(
+                    username='Todd', 
+                    email='tb@gmail.com', 
+                    password='passowrd'
+                    )
+    anddrew = User(
+                    username='Andrew', 
+                    email='as@gmail.com', 
+                    password='passowrd'
+                    )
+    jake = User(
+                    username='Jake', 
+                    email='jo@gmail.com', 
+                    password='passowrd'
+                    )
 
     db.session.add(chris)
     db.session.add(todd)

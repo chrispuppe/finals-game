@@ -12,7 +12,6 @@ from models import User, Selection
 from __init__ import db
 
 
-
 teams = teams.get_teams()
 
 # team_input_name = 'Golden State Warriors'
@@ -51,11 +50,6 @@ def user_list():
     sortedByName = sorted(users, key=lambda x: x['username'])
     return sortedByName
 
-# user_selection_1 = ['Stephen Curry', 'MAY 18, 2022', 'Chris', 1]
-# user_selection_2 = ['Luka Doncic', 'MAY 18, 2022', 'Andrew', 1]
-# user_selection_3 = ['Klay Thompson', 'MAY 18, 2022', 'Todd', 1]
-
-# all_user_selections = [user_selection_1, user_selection_2, user_selection_3]
 
 def all_user_selections():
     user_selections = []
@@ -71,16 +65,19 @@ def all_user_selections():
         user_selections.append(selection_arr)
     return user_selections
 
+
 def get_player_id(player_name):
     player_dict = players.get_players()
     selected_player = [player for player in player_dict if player['full_name'] == f'{player_name}'][0]
     selected_player_id = selected_player['id']
     return selected_player_id
 
+
 def get_team_abrv(full_team_name):
     selected_team = [x for x in teams if x['full_name'] == full_team_name][0]
     selected_team_abrv = selected_team['abbreviation']
     return selected_team_abrv
+
 
 def get_player_finals_stats(player_name):
     selected_player_id = get_player_id(player_name)
@@ -123,6 +120,7 @@ def get_player_finals_stats(player_name):
             player_playoff_stats.append(player_game_stats)
     return player_playoff_stats
 
+
 def get_team_players(team_name):
     
     selected_team = [x for x in teams if x['full_name'] == team_name][0]
@@ -142,6 +140,7 @@ def get_team_players(team_name):
                 team_roster.append(player)
     return team_roster
 
+
 def get_finals_players(team1, team2):
     team1_roster = get_team_players(team1)
     team2_roster = get_team_players(team2)
@@ -152,6 +151,7 @@ def get_finals_players(team1, team2):
     return finals_players
 
 finals_roster = get_finals_players(finals_team_1, finals_team_2)
+
 
 def scoreboard():
     user_choices = all_user_selections()
@@ -184,4 +184,3 @@ def scoreboard():
             }
             game_data.append(player_game)
     return game_data
-
