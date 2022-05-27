@@ -1,5 +1,5 @@
 # https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/
-from app import db
+from __init__ import db
 # from flask import Flask
 # from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
@@ -26,3 +26,19 @@ class Selection(db.Model):
         self.user_id = user_id
         self.game_date = game_date
         self.selected_player = selected_player
+
+if __name__ == "__main__":
+    db.drop_all()
+    db.create_all()
+
+    chris = User(username='Chris', email='chrispuppe@gmail.com', password='passowrd')
+    todd = User(username='Todd', email='tb@gmail.com', password='passowrd')
+    anddrew = User(username='Andrew', email='as@gmail.com', password='passowrd')
+    jake = User(username='Jake', email='jo@gmail.com', password='passowrd')
+
+    db.session.add(chris)
+    db.session.add(todd)
+    db.session.add(anddrew)
+    db.session.add(jake)
+
+    db.session.commit()

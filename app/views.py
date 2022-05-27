@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, redirect, request, url_for
-from app.controller import scoreboard, finals_roster, user_list, finals_game_dates
-from app.models import User, Selection
-from app import app, db
+from controller import scoreboard, finals_roster, user_list, finals_game_dates
+from models import User, Selection
+from __init__ import app, db
 
 
 @app.route('/')
@@ -55,4 +55,4 @@ def user_order():
     pass
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

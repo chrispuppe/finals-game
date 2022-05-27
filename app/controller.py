@@ -5,18 +5,18 @@
 
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import playergamelog, teamplayerdashboard
-import pandas as pd 
+# import pandas as pd 
 from nba_api.stats.static import teams 
-import numpy as np
-from app.models import User, Selection
-from app import db
+# import numpy as np
+from models import User, Selection
+from __init__ import db
 
 
 
 teams = teams.get_teams()
 
-team_input_name = 'Golden State Warriors'
-player_input_name = 'Stephen Curry'
+# team_input_name = 'Golden State Warriors'
+# player_input_name = 'Stephen Curry'
 selected_year = '2021'
 finals_team_1 = 'Golden State Warriors'
 finals_team_2 = 'Dallas Mavericks'
