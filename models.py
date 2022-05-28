@@ -59,9 +59,37 @@ if __name__ == "__main__":
                     password='passowrd'
                     )
 
+    ryan = User(
+                    username='Ryan', 
+                    email='ryan@gmail.com', 
+                    password='passowrd'
+    )
+
+    foram = User(
+                    username='Foram', 
+                    email='foram@gmail.com', 
+                    password='passowrd'
+    )
+
+    mark = User(
+                    username='Mark', 
+                    email='mark@gmail.com', 
+                    password='passowrd'
+    )
+
+    tyler = User(
+                    username='Tyler', 
+                    email='Tyler@gmail.com', 
+                    password='passowrd'
+    )
+
     db.session.add(chris)
     db.session.add(todd)
     db.session.add(anddrew)
     db.session.add(jake)
+    db.session.add(ryan)
+    db.session.add(foram)
+    db.session.add(mark)
+    db.session.add(tyler)
 
     db.session.commit()
