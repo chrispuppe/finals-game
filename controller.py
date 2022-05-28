@@ -154,9 +154,9 @@ def scoreboard():
     game_data = []
     user_scores = []
     current_users_list = user_list()
-    for user in current_users_list:
+    for list_user in current_users_list:
         user_for_board = {
-                            'Username': user['username'],
+                            'Username': list_user['username'],
                             'Score': 0
                             }
         user_scores.append(user_for_board)
@@ -172,10 +172,9 @@ def scoreboard():
                 player_game.update({'Selection_id': seleted_id})
                 game_data.append(player_game)
                 choice_count += 1
-                for user in user_scores:
-                    print(player_game)
-                    if user == selected_player:
-                        user['Score'] += player_game['TOT']
+                for board_user in user_scores:
+                    if board_user['Username'] == player_game['User']:
+                        board_user['Score'] += int(player_game['TOT'])
         if choice_count == 0:
             player_game = {
                 'Player Name': choice[0],
@@ -190,5 +189,4 @@ def scoreboard():
                 'Selection_id': seleted_id
             }
             game_data.append(player_game)
-    print(user_scores)
-    return game_data
+    return [game_data, user_scores]
