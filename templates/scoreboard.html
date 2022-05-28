@@ -1,59 +1,59 @@
-
-<!-- {% block scoreboard %} -->
-    <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Scoreboard</h1>
-        <table border="1" class="dataframe data">
-        <thead>
-          <tr style="text-align: right;">
-            <th>User</th>
-            <th>Player Name</th>
-            <th>Date</th>
-            <th>PTS</th>
-            <th>REB</th>
-            <th>AST</th>
-            <th>STL</th>
-            <th>BLK</th>
-            <th>TOT</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for game in updated_scoreboard[0] %}
-          <tr>
-            <th>{{game['User']}}</th>
-            <td>{{game['Player Name']}}</td>
-            <td>{{game['Date']}}</td>
-            <td>{{game['PTS']}}</td>
-            <td>{{game['REB']}}</td>
-            <td>{{game['AST']}}</td>
-            <td>{{game['STL']}}</td>
-            <td>{{game['BLK']}}</td>
-            <td>{{game['TOT']}}</td>
-            <td><a href="{{ url_for('delete_selection', id=game['Selection_id']) }}" method="POST">Delete</a></td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>  
-      </div>
-      <div class="container">
-        <h1>Player Scores</h1>
-        <table border="1" class="dataframe data">
-          <thead>
-            <tr style="text-align: right;">
-              <th>User</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for game in updated_scoreboard[1] %}
-            <tr>
-              <th>{{game['Username']}}</th>
-              <td>{{game['Score']}}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+        <div class="row">
+          <div class="col">
+            <h1>Scoreboard</h1>
+            <table border="1" class="dataframe data">
+              <thead>
+                <tr style="text-align: right;">
+                  <th>User</th>
+                  <th>Player Name</th>
+                  <th>Date</th>
+                  <th>PTS</th>
+                  <th>REB</th>
+                  <th>AST</th>
+                  <th>STL</th>
+                  <th>BLK</th>
+                  <th>TOT</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for game in updated_scoreboard[0] %}
+                <tr>
+                  <th>{{game['User']}}</th>
+                  <td>{{game['Player Name']}}</td>
+                  <td>{{game['Date']}}</td>
+                  <td>{{game['PTS']}}</td>
+                  <td>{{game['REB']}}</td>
+                  <td>{{game['AST']}}</td>
+                  <td>{{game['STL']}}</td>
+                  <td>{{game['BLK']}}</td>
+                  <td>{{game['TOT']}}</td>
+                  <td><a href="{{ url_for('delete_selection', id=game['Selection_id']) }}" method="POST">Delete</a></td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table> 
+          </div>
+          <div class="col">
+            <h1>Player Scores</h1>
+            <table border="1" class="dataframe data">
+              <thead>
+                <tr style="text-align: right;">
+                  <th>User</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for game in updated_scoreboard[1] %}
+                <tr>
+                  <th>{{game['Username']}}</th>
+                  <td>{{game['Score']}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-<!-- {% endblock %} -->
