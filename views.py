@@ -21,7 +21,7 @@ def home():
     updated_scoreboard = scoreboard()
     return render_template(
                             'index.html', 
-                            updated_scoreboard=updated_scoreboard
+                            updated_scoreboard=updated_scoreboard,
                             )
 
 @app.route('/login', methods=['GET', 'POST'])
