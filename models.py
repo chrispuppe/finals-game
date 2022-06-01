@@ -7,7 +7,7 @@ from flask_login import UserMixin
 
 
 class User(UserMixin, db.Model):
-    user_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(80))
@@ -17,9 +17,9 @@ class User(UserMixin, db.Model):
 
 class Selection(db.Model):
     selection_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(
+    id = db.Column(
                             db.Integer, 
-                            ForeignKey('user.user_id'), 
+                            ForeignKey('user.id'), 
                             nullable=False
                             )
     game_date = db.Column(
@@ -28,9 +28,9 @@ class Selection(db.Model):
                             )
     selected_player = db.Column(db.String(80), nullable=False)
 
-    def __init__(self, user_id, game_date, 
+    def __init__(self, id, game_date, 
                 selected_player):
-        self.user_id = user_id
+        self.id = id
         self.game_date = game_date
         self.selected_player = selected_player
 
@@ -41,46 +41,46 @@ if __name__ == "__main__":
     chris = User(
                     username='Chris', 
                     email='chrispuppe@gmail.com', 
-                    password='passowrd'
+                    password='password'
                     )
     todd = User(
                     username='Todd', 
                     email='tb@gmail.com', 
-                    password='passowrd'
+                    password='password'
                     )
     anddrew = User(
                     username='Andrew', 
                     email='as@gmail.com', 
-                    password='passowrd'
+                    password='password'
                     )
     jake = User(
                     username='Jake', 
                     email='jo@gmail.com', 
-                    password='passowrd'
+                    password='password'
                     )
 
     ryan = User(
                     username='Ryan', 
                     email='ryan@gmail.com', 
-                    password='passowrd'
+                    password='password'
     )
 
     foram = User(
                     username='Foram', 
                     email='foram@gmail.com', 
-                    password='passowrd'
+                    password='password'
     )
 
     mark = User(
                     username='Mark', 
                     email='mark@gmail.com', 
-                    password='passowrd'
+                    password='password'
     )
 
     tyler = User(
                     username='Tyler', 
                     email='Tyler@gmail.com', 
-                    password='passowrd'
+                    password='password'
     )
 
     db.session.add(chris)

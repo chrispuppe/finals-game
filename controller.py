@@ -47,7 +47,7 @@ def user_list():
     users = []
     all_db_users = User.query.all()
     for user in all_db_users:
-        user_dict = {'username': user.username, 'user_id': user.user_id}
+        user_dict = {'username': user.username, 'id': user.id}
         users.append(user_dict)
     sortedByName = sorted(users, key=lambda x: x['username'])
     return sortedByName
@@ -57,7 +57,7 @@ def all_user_selections():
     user_selections = []
     all_db_selections = Selection.query.all()
     for selection in all_db_selections:
-        selection_username = db.session.query(User).get(selection.user_id).username
+        selection_username = db.session.query(User).get(selection.id).username
         selection_arr = [
                             selection.selected_player,
                             selection.game_date,
@@ -201,3 +201,6 @@ def scoreboard():
         return scoreboard_cache['scoreboard_save']
     else:
         return scoreboard_cache['scoreboard_save']
+
+def clear_scoreboard_cache():
+    scoreboard_cache['current_timestamp'] = None

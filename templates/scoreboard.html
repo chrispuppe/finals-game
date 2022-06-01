@@ -29,7 +29,9 @@
                   <td>{{game['STL']}}</td>
                   <td>{{game['BLK']}}</td>
                   <td>{{game['TOT']}}</td>
+                  {% if current_user.is_authenticated %}
                   <td><a href="{{ url_for('delete_selection', id=game['Selection_id']) }}" method="POST">Delete</a></td>
+                  {% endif %}
                 </tr>
               {% endfor %}
               </tbody>
