@@ -8,9 +8,15 @@ from nba_api.stats.endpoints import playergamelog, teamplayerdashboard
 from nba_api.stats.static import teams 
 from models import User, Selection
 from __init__ import db
+import time
 
 
 teams = teams.get_teams()
+
+scoreboard_cache = {
+    'scoreboard_save': None,
+    'current_timestamp': None
+}
 
 selected_year = '2021'
 finals_team_1 = 'Miami Heat'
@@ -150,43 +156,48 @@ finals_roster = get_finals_players(finals_team_1, finals_team_2)
 
 
 def scoreboard():
-    user_choices = all_user_selections()
-    game_data = []
-    user_scores = []
-    current_users_list = user_list()
-    for list_user in current_users_list:
-        user_for_board = {
-                            'Username': list_user['username'],
-                            'Score': 0
-                            }
-        user_scores.append(user_for_board)
-    for choice in user_choices:
-        choice_count = 0
-        selected_player = get_player_finals_stats(choice[0])
-        selected_date = choice[1]
-        selected_user = choice[2]
-        seleted_id = choice[3]
-        for player_game in selected_player:
-            if selected_date == player_game['Date']:
-                player_game.update({'User': selected_user})
-                player_game.update({'Selection_id': seleted_id})
+    if scoreboard_cache['current_timestamp'] == None or time.time() - scoreboard_cache['current_timestamp'] > 120:
+        user_choices = all_user_selections()
+        game_data = []
+        user_scores = []
+        current_users_list = user_list()
+        for list_user in current_users_list:
+            user_for_board = {
+                                'Username': list_user['username'],
+                                'Score': 0
+                                }
+            user_scores.append(user_for_board)
+        for choice in user_choices:
+            choice_count = 0
+            selected_player = get_player_finals_stats(choice[0])
+            selected_date = choice[1]
+            selected_user = choice[2]
+            seleted_id = choice[3]
+            for player_game in selected_player:
+                if selected_date == player_game['Date']:
+                    player_game.update({'User': selected_user})
+                    player_game.update({'Selection_id': seleted_id})
+                    game_data.append(player_game)
+                    choice_count += 1
+                    for board_user in user_scores:
+                        if board_user['Username'] == player_game['User']:
+                            board_user['Score'] += int(player_game['TOT'])
+            if choice_count == 0:
+                player_game = {
+                    'Player Name': choice[0],
+                    'PTS': 0,
+                    'REB': 0,
+                    'AST': 0,
+                    'STL': 0,
+                    'BLK': 0,
+                    'TOT': 0,
+                    'Date': selected_date,
+                    'User': selected_user,
+                    'Selection_id': seleted_id
+                }
                 game_data.append(player_game)
-                choice_count += 1
-                for board_user in user_scores:
-                    if board_user['Username'] == player_game['User']:
-                        board_user['Score'] += int(player_game['TOT'])
-        if choice_count == 0:
-            player_game = {
-                'Player Name': choice[0],
-                'PTS': 0,
-                'REB': 0,
-                'AST': 0,
-                'STL': 0,
-                'BLK': 0,
-                'TOT': 0,
-                'Date': selected_date,
-                'User': selected_user,
-                'Selection_id': seleted_id
-            }
-            game_data.append(player_game)
-    return [game_data, user_scores]
+        scoreboard_cache['scoreboard_save'] = [game_data, user_scores]
+        scoreboard_cache['current_timestamp'] = time.time()
+        return scoreboard_cache['scoreboard_save']
+    else:
+        return scoreboard_cache['scoreboard_save']
