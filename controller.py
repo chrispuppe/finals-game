@@ -19,20 +19,10 @@ scoreboard_cache = {
 }
 
 selected_year = '2021'
-finals_team_1 = 'Miami Heat'
+finals_team_1 = 'Golden State Warriors'
 finals_team_2 = 'Boston Celtics'
 
 finals_game_dates = [
-                        'MAY 17, 2022',
-                        'MAY 19, 2022',
-                        'MAY 22, 2022',
-                        'MAY 21, 2022',
-                        'MAY 25, 2022',
-                        'MAY 27, 2022',
-                        'MAY 29, 2022'
-                        ]
-
-real_finals_dates = [
                         'JUN 02, 2022',
                         'JUN 05, 2022',
                         'JUN 08, 2022',

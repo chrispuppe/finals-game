@@ -77,11 +77,6 @@ if __name__ == "__main__":
                     password='password'
     )
 
-    tyler = User(
-                    username='Tyler', 
-                    email='Tyler@gmail.com', 
-                    password='password'
-    )
 
     db.session.add(chris)
     db.session.add(todd)
@@ -90,6 +85,5 @@ if __name__ == "__main__":
     db.session.add(ryan)
     db.session.add(foram)
     db.session.add(mark)
-    db.session.add(tyler)
 
     db.session.commit()
