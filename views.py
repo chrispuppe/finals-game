@@ -18,7 +18,11 @@ def load_user(user_id):
 @app.route('/')
 @app.route('/index')
 def home():
-    updated_scoreboard = scoreboard()
+    try:
+        updated_scoreboard = scoreboard()
+    except:
+        updated_scoreboard = []
+        raise Exception('scoreboard call failed')
     return render_template(
                             'index.html', 
                             updated_scoreboard=updated_scoreboard,
@@ -37,8 +41,7 @@ def login():
             if user.password == form.password.data:
                 # print('logged in successfully')
                 login_user(user, remember=form.remember.data)
-                updated_scoreboard = scoreboard()
-                return redirect(url_for('admin', updated_scoreboard=updated_scoreboard))
+                return redirect(url_for('admin'))
             else:
                 error = "Invalid username or password. Please try again."
 
