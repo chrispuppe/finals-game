@@ -1,7 +1,7 @@
 import secrets
 import os
 
-DEBUG = True
+DEBUG = False
 PORT = 5000
 HOST = "0.0.0.0"
 SQLALCHEMY_ECHO = False
