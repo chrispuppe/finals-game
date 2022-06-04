@@ -89,4 +89,4 @@ if __name__ == "__main__":
     db.session.commit()
 
     chosen_user = User.query.filter_by(username='Jake').first()
-    print(chosen_user['password'])
+    print(chosen_user.password)
