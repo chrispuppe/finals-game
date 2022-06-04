@@ -15,7 +15,8 @@ if not on_heroku:
     app.config.from_object('config')
 else:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    SQLALCHEMY_DATABASE_URI = os.environ['SQLALCHEMY_DATABASE_URI']
+    print('SQLALCHEMY_DATABASE_URI')
 
 # Create an instance of SQLAclhemy
 db = SQLAlchemy(app)
