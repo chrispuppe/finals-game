@@ -10,9 +10,9 @@ from models import User, Selection
 from __init__ import db
 import time
 
-teams = []
+# teams = []
 player_dict = []
-# teams = teams.get_teams()
+teams = teams.get_teams()
 # player_dict = players.get_players()
 
 scoreboard_cache = {
