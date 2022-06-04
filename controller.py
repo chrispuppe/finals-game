@@ -196,3 +196,8 @@ def scoreboard():
 
 def clear_scoreboard_cache():
     scoreboard_cache['current_timestamp'] = None
+
+
+if __name__ == "__main__":
+    print(player_dict)
+    print(teams)
