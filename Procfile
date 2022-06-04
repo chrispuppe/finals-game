@@ -1,1 +1,1 @@
-web: gunicorn views:app
+web: python views.py runserver 0.0.0.0
