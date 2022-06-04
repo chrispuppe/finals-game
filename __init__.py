@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # Include config from config.py
 on_heroku = False
-if 'IS_ON_HEROKU_ENVIRONMENT' in os.environ:
+if ENV['IS_ON_HEROKU_ENVIRONMENT']:
   on_heroku = True
   print('Using Heroku environment')
 if not on_heroku:
