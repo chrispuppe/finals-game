@@ -56,7 +56,7 @@ if __name__ == "__main__":
     jake = User(
                     username='Jake', 
                     email='jo@gmail.com', 
-                    password='password'
+                    password='password1'
                     )
 
     ryan = User(
@@ -87,3 +87,6 @@ if __name__ == "__main__":
     db.session.add(mark)
 
     db.session.commit()
+
+    chosen_user = User.query.filter_by(username='Jake').first()
+    print(chosen_user['password'])
