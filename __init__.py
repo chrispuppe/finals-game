@@ -11,7 +11,7 @@ on_heroku = False
 if os.environ['IS_ON_HEROKU_ENVIRONMENT']:
   on_heroku = True
   print('Using Heroku environment')
-if not on_heroku:
+if on_heroku == False:
     app.config.from_object('config')
 else:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
