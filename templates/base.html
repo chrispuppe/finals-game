@@ -34,7 +34,7 @@
         <div id="navbar" class="navbar-collapse collapse">
         {% if current_user.is_authenticated %}
           <div class="navbar-form navbar-right">
-            <a class="btn btn-success" href="{{ url_for('logout') }}" role="button">Logout</a>
+            <a class="btn btn-danger" href="{{ url_for('logout') }}" role="button">Logout</a>
           </div>
         {% else %}
         <div class="navbar-form navbar-right" role="form" method="POST" action="/login">
