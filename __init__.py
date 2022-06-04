@@ -13,6 +13,9 @@ if 'IS_ON_HEROKU_ENVIRONMENT' in os.environ:
   print('Using Heroku environment')
 if not on_heroku:
     app.config.from_object('config')
+else:
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
 # Create an instance of SQLAclhemy
 db = SQLAlchemy(app)
