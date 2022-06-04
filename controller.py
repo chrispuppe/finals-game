@@ -12,7 +12,6 @@ import time
 
 
 teams = teams.get_teams()
-time.sleep(3)
 player_dict = players.get_players()
 
 scoreboard_cache = {
@@ -112,7 +111,6 @@ def get_player_finals_stats(player_name):
                 'Date': game_day
             }
             player_playoff_stats.append(player_game_stats)
-    time.sleep(3)
     return player_playoff_stats
 
 
