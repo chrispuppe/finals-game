@@ -1,11 +1,17 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension
+import os
 
 # Create an Instance of Flask
 app = Flask(__name__)
+
 # Include config from config.py
-app.config.from_object('config')
+on_heroku = False
+if 'IS_ON_HEROKU_ENVIRONMENT' in os.environ:
+  on_heroku = True
+if not on_heroku:
+    app.config.from_object('config')
 
 # Create an instance of SQLAclhemy
 db = SQLAlchemy(app)
