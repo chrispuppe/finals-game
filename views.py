@@ -14,6 +14,7 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+login_manager.login_view = 'login'
 
 @app.route('/')
 @app.route('/index')
@@ -52,7 +53,7 @@ def login():
 
 
 
-@app.route("/logout")
+@app.route("/logout", methods=['GET'])
 @login_required
 def logout():
     logout_user()
