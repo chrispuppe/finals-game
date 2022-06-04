@@ -16,7 +16,7 @@ if on_heroku == False:
 else:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ['SQLALCHEMY_DATABASE_URI']
-    print('SQLALCHEMY_DATABASE_URI')
+    print(SQLALCHEMY_DATABASE_URI)
 
 # Create an instance of SQLAclhemy
 db = SQLAlchemy(app)
