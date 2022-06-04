@@ -143,8 +143,8 @@ def get_finals_players(team1, team2):
                     ]
     return finals_players
 
-# finals_roster = get_finals_players(finals_team_1, finals_team_2)
-finals_roster = []
+finals_roster = get_finals_players(finals_team_1, finals_team_2)
+# finals_roster = []
 
 def scoreboard():
     return scoreboard_cache['scoreboard_save']
