@@ -5,7 +5,7 @@ DEBUG = False
 PORT = 5000
 HOST = "0.0.0.0"
 SQLALCHEMY_ECHO = False
-SECRET_KEY = secrets.token_urlsafe(24)
+SECRET_KEY = os.environ['SECRET_KEY']
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 WHOOSH_BASE = "whoosh"
 # PostgreSQL
