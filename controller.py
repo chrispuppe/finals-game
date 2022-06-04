@@ -11,9 +11,9 @@ from __init__ import db
 import time
 
 # teams = []
-player_dict = []
+# player_dict = []
 teams = teams.get_teams()
-# player_dict = players.get_players()
+player_dict = players.get_players()
 
 scoreboard_cache = {
     'scoreboard_save': None,
