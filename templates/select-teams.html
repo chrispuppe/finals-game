@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+Select Teams
+{% endblock %}
+
+{% block content %}
+
+<!-- {% include "scoreboard.html" %} -->
+
+<!-- admin sidebar for admin navigation to be add (left or right side?)-->
+<div class="container">
+    <p></p>
+    <!-- Example row of columns -->
+    <div class="row">
+        <form>
+            <label for="home">Home Team:</label>
+            <select name="home" id="home">
+                <option value="" disabled selected>Select a team</option>
+            {% for team in all_nba_teams %}
+                <option value="{{ team['id'] }}">{{ team['full_name'] }}</option>
+            {% endfor %}
+            </select>
+
+            <label for="away">Away Team:</label>
+            <select name="away" id="away">
+                <option value="" disabled selected>Select a team</option>
+            {% for team in all_nba_teams %}
+                <option value="{{ team['id'] }}">{{ team['full_name'] }}</option>
+            {% endfor %}
+            </select>
+            
+            <input type="submit" value="Submit" formmethod="post">
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

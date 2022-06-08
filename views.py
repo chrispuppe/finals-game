@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, redirect, request, url_for, flash, abort
-from controller import scoreboard, finals_roster, user_list, finals_game_dates, clear_scoreboard_cache
+from controller import scoreboard, finals_roster, user_list, finals_game_dates, clear_scoreboard_cache, teams
 from models import User, Selection
 from __init__ import app, db
 from flask_login import LoginManager, login_user, login_required, logout_user
@@ -94,9 +94,22 @@ def delete_selection(id):
     clear_scoreboard_cache()
     return redirect(url_for('admin'))
 
-@app.route('/select-teams')
+@app.route('/select-teams', methods=['GET', 'POST'])
 def team_selection():
-    pass
+    all_nba_teams = teams
+    # print(all_nba_teams)
+    team_list = finals_roster
+    users = user_list()
+    game_dates = finals_game_dates
+    updated_scoreboard = scoreboard()
+    return render_template(
+                            'select-teams.html',
+                                all_nba_teams=all_nba_teams,
+                                team_list=team_list,
+                                users=users,
+                                game_dates=game_dates,
+                                updated_scoreboard=updated_scoreboard
+                            )
 
 @app.route('/select-dates')
 def date_selection():

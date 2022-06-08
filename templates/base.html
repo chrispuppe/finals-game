@@ -44,6 +44,11 @@
           <div class="navbar-form navbar-right">
               <a class="btn btn-default" href="{{ url_for('admin') }}" role="button">Admin</a>
           </div>
+        {% if current_user.is_authenticated %}
+          <div class="navbar-form navbar-right">
+            <a class="btn btn-default" href="{{ url_for('team_selection') }}" role="button">Teams</a>
+          </div>
+        {% endif %}
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
