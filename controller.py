@@ -14,7 +14,6 @@ import time
 # player_dict = []
 teams = teams.get_teams()
 player_dict = players.get_players()
-saved_requests = 0
 
 scoreboard_cache = {
     'scoreboard_save': None,
@@ -103,7 +102,7 @@ def get_player_finals_stats(player_name):
     for player in player_cache:
         if selected_player_id == player['player_id'] and time.time() - player['current_timestamp'] < 120:
             df_player_input = player['player_record']
-            # saved_requests += 1
+            print('saved 1')
         elif selected_player_id == player['player_id'] and time.time() - player['current_timestamp'] >= 120:
             df_player_input = get_player_df(selected_player_id)
             player['current_timestamp'] = time.time()
@@ -224,10 +223,8 @@ def scoreboard():
                 game_data.append(player_game)
         scoreboard_cache['scoreboard_save'] = [game_data, user_scores]
         scoreboard_cache['current_timestamp'] = time.time()
-        # print(saved_requests)
         return scoreboard_cache['scoreboard_save']
     else:
-        # print(saved_requests)
         return scoreboard_cache['scoreboard_save']
 
 def clear_scoreboard_cache():
