@@ -92,7 +92,6 @@ def delete_selection(id):
 @app.route('/select-teams', methods=['GET', 'POST'])
 def team_selection():
     all_nba_teams = teams
-    # print(all_nba_teams)
     team_list = finals_roster
     users = user_list()
     game_dates = finals_game_dates
