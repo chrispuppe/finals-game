@@ -14,11 +14,14 @@ import time
 # player_dict = []
 teams = teams.get_teams()
 player_dict = players.get_players()
+saved_requests = 0
 
 scoreboard_cache = {
     'scoreboard_save': None,
     'current_timestamp': None
 }
+
+player_cache =[]
 
 selected_year = '2021'
 finals_team_1 = 'Golden State Warriors'
@@ -73,13 +76,43 @@ def get_team_abrv(full_team_name):
     return selected_team_abrv
 
 
+def get_player_df(player_id):
+    gamelog_player_input = playergamelog.PlayerGameLog(
+                                                player_id=f'{player_id}', 
+                                                season_type_all_star='Playoffs', 
+                                                season=selected_year
+                                                )
+    player_df = gamelog_player_input.get_data_frames()[0]
+    return player_df
+
+
+def fresh_player_record(player_id):
+    player_record = {
+                        'player_id': player_id,
+                        'current_timestamp': time.time(),
+                        'player_record': get_player_df(player_id)
+                        }
+    player_cache.append(player_record)
+    return player_record
+
+
 def get_player_finals_stats(player_name):
     selected_player_id = get_player_id(player_name)
-    gamelog_player_input = playergamelog.PlayerGameLog(
-                                                        player_id=f'{selected_player_id}', 
-                                                        season_type_all_star='Playoffs', 
-                                                        season=selected_year)
-    df_player_input = gamelog_player_input.get_data_frames()[0]
+    df_player_input = None
+
+    for player in player_cache:
+        if selected_player_id == player['player_id'] and time.time() - player['current_timestamp'] < 120:
+            df_player_input = player['player_record']
+            # saved_requests += 1
+        elif selected_player_id == player['player_id'] and time.time() - player['current_timestamp'] >= 120:
+            df_player_input = get_player_df(selected_player_id)
+            player['current_timestamp'] = time.time()
+            player['player_record'] = df_player_input
+        else:
+            df_player_input = fresh_player_record(selected_player_id)['player_record']
+    if df_player_input is None and len(player_cache) == 0:
+        df_player_input = fresh_player_record(selected_player_id)['player_record']
+
     number_of_games = len(df_player_input)
     player_playoff_stats = []
     for i in range(0, number_of_games):
@@ -162,11 +195,11 @@ def scoreboard():
             user_scores.append(user_for_board)
         for choice in user_choices:
             choice_count = 0
-            selected_player = get_player_finals_stats(choice[0])
+            selected_player_choice = get_player_finals_stats(choice[0])
             selected_date = choice[1]
             selected_user = choice[2]
             seleted_id = choice[3]
-            for player_game in selected_player:
+            for player_game in selected_player_choice:
                 if selected_date == player_game['Date']:
                     player_game.update({'User': selected_user})
                     player_game.update({'Selection_id': seleted_id})
@@ -191,8 +224,10 @@ def scoreboard():
                 game_data.append(player_game)
         scoreboard_cache['scoreboard_save'] = [game_data, user_scores]
         scoreboard_cache['current_timestamp'] = time.time()
+        # print(saved_requests)
         return scoreboard_cache['scoreboard_save']
     else:
+        # print(saved_requests)
         return scoreboard_cache['scoreboard_save']
 
 def clear_scoreboard_cache():
@@ -200,5 +235,7 @@ def clear_scoreboard_cache():
 
 
 if __name__ == "__main__":
-    print(player_dict)
-    print(teams)
+    # print(player_dict)
+    # print(teams)
+    print(get_player_finals_stats('Stephen Curry'))
+    print(get_player_finals_stats('Stephen Curry'))
