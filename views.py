@@ -37,18 +37,13 @@ def login():
     # checks the username and password against the DB and logs the user in if valid
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        # print(user.password, form.password.data) 
         if user:
             if user.password == form.password.data:
-                # print('logged in successfully')
                 login_user(user, remember=form.remember.data)
                 return redirect(url_for('admin'))
             else:
                 error = "Invalid username or password. Please try again."
-
-        # if not valid replies as such
         return render_template('login.html', form=form, error=error)
-    print('not validated')
     return render_template('login.html', form=form)
 
 
