@@ -102,7 +102,6 @@ def get_player_finals_stats(player_name):
     for player in player_cache:
         if selected_player_id == player['player_id'] and time.time() - player['current_timestamp'] < 120:
             df_player_input = player['player_record']
-            print('saved 1')
         elif selected_player_id == player['player_id'] and time.time() - player['current_timestamp'] >= 120:
             df_player_input = get_player_df(selected_player_id)
             player['current_timestamp'] = time.time()
