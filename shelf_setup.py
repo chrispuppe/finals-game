@@ -17,8 +17,11 @@ scoreboard_cache = {
 }
 
 with shelve.open('./vars_persist/vars', 'c') as shelf:
-    shelf['finals_game_dates'] = finals_game_dates
-    shelf['selected_year'] = selected_year
-    shelf['scoreboard_cache'] = scoreboard_cache
+    # shelf['finals_game_dates'] = finals_game_dates
+    # shelf['selected_year'] = selected_year
+    # shelf['scoreboard_cache'] = scoreboard_cache
+    # shelf['finals_team_1'] = 'Golden State Warriors'
+    # shelf['finals_team_2'] = 'Boston Celtics'
+    print(shelf['finals_team_1'], shelf['finals_team_2'])
 
 shelf.close()

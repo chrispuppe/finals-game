@@ -6,7 +6,7 @@ Select Teams
 
 {% block content %}
 
-<!-- {% include "scoreboard.html" %} -->
+
 
 <!-- admin sidebar for admin navigation to be add (left or right side?)-->
 <div class="container">
@@ -16,17 +16,20 @@ Select Teams
         <form>
             <label for="home">Home Team:</label>
             <select name="home" id="home">
-                <option value="" disabled selected>Select a team</option>
             {% for team in all_nba_teams %}
-                <option value="{{ team['id'] }}">{{ team['full_name'] }}</option>
+                {% if team['full_name'] == current_home_team %}
+                <option value="{{ team['full_name'] }}" selected>{{ team['full_name'] }}</option>
+                {% else %}
+                <option value="{{ team['full_name'] }}">{{ team['full_name'] }}</option>
+                {% endif %}
             {% endfor %}
             </select>
 
             <label for="away">Away Team:</label>
             <select name="away" id="away">
-                <option value="" disabled selected>Select a team</option>
+                <option value="{{ current_away_team }}" selected>{{ current_away_team }}</option>
             {% for team in all_nba_teams %}
-                <option value="{{ team['id'] }}">{{ team['full_name'] }}</option>
+                <option value="{{ team['full_name'] }}">{{ team['full_name'] }}</option>
             {% endfor %}
             </select>
             

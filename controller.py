@@ -13,7 +13,7 @@ import shelve
 
 teams = None
 player_dict = None
-finals_team_1 = None
+
 finals_team_2 = None
 selected_year = None
 finals_game_dates = None
@@ -23,11 +23,35 @@ player_cache = []
 with shelve.open('./vars_persist/vars', 'c') as shelf:
         teams = shelf['all_teams']
         player_dict = shelf['player_dict']
-        finals_team_1 = shelf['finals_team_1']
         finals_team_2 = shelf['finals_team_2']
         finals_game_dates = shelf['finals_game_dates']
         selected_year = shelf['selected_year']
         scoreboard_cache = shelf['scoreboard_cache']
+        shelf.close()
+
+
+def finals_team_1():
+    get_team = None
+    with shelve.open('./vars_persist/vars', 'c') as shelf:
+        get_team = shelf['finals_team_1']
+        shelf.close()
+    return get_team
+
+
+def finals_team_2():
+    get_team = None
+    with shelve.open('./vars_persist/vars', 'c') as shelf:
+        get_team = shelf['finals_team_2']
+        shelf.close()
+    return get_team
+
+
+def update_finals_teams(team1, team2):
+    with shelve.open('./vars_persist/vars', 'c') as shelf:
+        shelf['finals_team_1'] = team1
+        shelf['finals_team_2'] = team2
+        shelf.close()
+
 
 def user_list():
     users = []
@@ -107,8 +131,8 @@ def get_player_finals_stats(player_name):
     player_playoff_stats = []
     for i in range(0, number_of_games):
         game = df_player_input.loc[i,'MATCHUP']
-        team1 = get_team_abrv(finals_team_1)
-        team2 = get_team_abrv(finals_team_2)
+        team1 = get_team_abrv(finals_team_1())
+        team2 = get_team_abrv(finals_team_2())
         if team1 in game and team2 in game:
             player_pts = df_player_input.loc[i,'PTS']
             player_reb = df_player_input.loc[i,'REB']
@@ -165,8 +189,14 @@ def get_finals_players(team1, team2):
                     ]
     return finals_players
 
-finals_roster = get_finals_players(finals_team_1, finals_team_2)
-# finals_roster = []
+def finals_roster():
+    team1 = finals_team_1()
+    team2 = finals_team_2()
+    roster = get_finals_players(team1, team2)
+    return roster
+
+# def update_finals_roster():
+#     finals_roster = get_finals_players(finals_team_1(), finals_team_2())
 
 def scoreboard():
     # return scoreboard_cache['scoreboard_save']

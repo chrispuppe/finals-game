@@ -1,5 +1,5 @@
-'finals_team_1', (0, 36)
-'finals_team_2', (512, 29)
+'finals_team_1', (0, 29)
+'finals_team_2', (512, 36)
 'all_teams', (1024, 2469)
 'player_dict', (3584, 228292)
 'finals_game_dates', (231936, 121)

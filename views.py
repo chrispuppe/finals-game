@@ -1,10 +1,11 @@
 from flask import Flask, render_template, session, redirect, request, url_for, flash, abort
-from controller import scoreboard, finals_roster, user_list, finals_game_dates, clear_scoreboard_cache, teams
+from controller import scoreboard, finals_roster, user_list, finals_game_dates, clear_scoreboard_cache, teams, update_finals_teams, finals_team_1, finals_team_2
 from models import User, Selection
 from __init__ import app, db
 from flask_login import LoginManager, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from login import LoginForm
+import shelve
 
 
 login_manager = LoginManager()
@@ -58,7 +59,7 @@ def logout():
 @login_required
 def admin():
     if request.method == 'GET':
-        team_list = finals_roster
+        team_list = finals_roster()
         users = user_list()
         game_dates = finals_game_dates
         updated_scoreboard = scoreboard()
@@ -91,19 +92,23 @@ def delete_selection(id):
 
 @app.route('/select-teams', methods=['GET', 'POST'])
 def team_selection():
-    all_nba_teams = teams
-    team_list = finals_roster
-    users = user_list()
-    game_dates = finals_game_dates
-    updated_scoreboard = scoreboard()
-    return render_template(
-                            'select-teams.html',
-                                all_nba_teams=all_nba_teams,
-                                team_list=team_list,
-                                users=users,
-                                game_dates=game_dates,
-                                updated_scoreboard=updated_scoreboard
-                            )
+    if request.method == 'GET':
+        all_nba_teams = teams
+        current_home_team = finals_team_1()
+        current_away_team = finals_team_2()
+        return render_template(
+                                'select-teams.html',
+                                    all_nba_teams=all_nba_teams,
+                                    current_home_team=current_home_team,
+                                    current_away_team=current_away_team
+                                )
+    if request.method == 'POST':
+        home_team = request.form['home']
+        away_team = request.form['away']
+        update_finals_teams(home_team, away_team)
+        with shelve.open('./vars_persist/vars', 'c') as shelf:
+            print(shelf['finals_team_1'], shelf['finals_team_2'])
+        return(redirect(url_for('admin')))
 
 @app.route('/select-dates')
 def date_selection():
