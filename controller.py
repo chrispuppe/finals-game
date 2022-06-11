@@ -9,11 +9,15 @@ from nba_api.stats.static import teams
 from models import User, Selection
 from __init__ import db
 import time
+import shelve
 
-# teams = []
-# player_dict = []
-teams = teams.get_teams()
-player_dict = players.get_players()
+teams = None
+player_dict = None
+
+with shelve.open('./vars_persist/vars', 'c') as shelf:
+        teams = shelf['all_teams']
+        player_dict = shelf['player_dict']
+
 
 scoreboard_cache = {
     'scoreboard_save': None,
@@ -233,5 +237,12 @@ def clear_scoreboard_cache():
 if __name__ == "__main__":
     # print(player_dict)
     # print(teams)
-    print(get_player_finals_stats('Stephen Curry'))
-    print(get_player_finals_stats('Stephen Curry'))
+    # print(get_player_finals_stats('Stephen Curry'))
+    # print(get_player_finals_stats('Stephen Curry'))
+
+    # initial var file setup
+    with shelve.open('./vars_persist/vars', 'c') as shelf:
+        shelf['finals_team_1'] = 'Golden State Warriors'
+        shelf['finals_team_2'] = 'Boston Celtics'
+        shelf['all_teams'] = teams
+        shelf['player_dict'] = player_dict
