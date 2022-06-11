@@ -13,33 +13,21 @@ import shelve
 
 teams = None
 player_dict = None
+finals_team_1 = None
+finals_team_2 = None
+selected_year = None
+finals_game_dates = None
+scoreboard_cache = None
+player_cache = []
 
 with shelve.open('./vars_persist/vars', 'c') as shelf:
         teams = shelf['all_teams']
         player_dict = shelf['player_dict']
-
-
-scoreboard_cache = {
-    'scoreboard_save': None,
-    'current_timestamp': None
-}
-
-player_cache =[]
-
-selected_year = '2021'
-finals_team_1 = 'Golden State Warriors'
-finals_team_2 = 'Boston Celtics'
-
-finals_game_dates = [
-                        'JUN 02, 2022',
-                        'JUN 05, 2022',
-                        'JUN 08, 2022',
-                        'JUN 10, 2022',
-                        'JUN 13, 2022',
-                        'JUN 16, 2022',
-                        'JUN 19, 2022'
-                        ]
-
+        finals_team_1 = shelf['finals_team_1']
+        finals_team_2 = shelf['finals_team_2']
+        finals_game_dates = shelf['finals_game_dates']
+        selected_year = shelf['selected_year']
+        scoreboard_cache = shelf['scoreboard_cache']
 
 def user_list():
     users = []
@@ -151,7 +139,6 @@ def get_player_finals_stats(player_name):
 
 
 def get_team_players(team_name):
-    
     selected_team = [x for x in teams if x['full_name'] == team_name][0]
     selected_team_id = selected_team['id']
     team_roster = []
@@ -237,12 +224,12 @@ def clear_scoreboard_cache():
 if __name__ == "__main__":
     # print(player_dict)
     # print(teams)
-    # print(get_player_finals_stats('Stephen Curry'))
-    # print(get_player_finals_stats('Stephen Curry'))
+    print(get_player_finals_stats('Stephen Curry'))
+    print(get_player_finals_stats('Stephen Curry'))
 
     # initial var file setup
-    with shelve.open('./vars_persist/vars', 'c') as shelf:
-        shelf['finals_team_1'] = 'Golden State Warriors'
-        shelf['finals_team_2'] = 'Boston Celtics'
-        shelf['all_teams'] = teams
-        shelf['player_dict'] = player_dict
+    # with shelve.open('./vars_persist/vars', 'c') as shelf:
+    #     shelf['finals_team_1'] = 'Golden State Warriors'
+    #     shelf['finals_team_2'] = 'Boston Celtics'
+    #     shelf['all_teams'] = teams
+    #     shelf['player_dict'] = player_dict

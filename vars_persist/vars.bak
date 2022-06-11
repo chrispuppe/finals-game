@@ -2,3 +2,6 @@
 'finals_team_2', (512, 29)
 'all_teams', (1024, 2469)
 'player_dict', (3584, 228292)
+'finals_game_dates', (231936, 121)
+'selected_year', (232448, 19)
+'scoreboard_cache', (232960, 56)
