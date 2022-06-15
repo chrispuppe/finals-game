@@ -5,3 +5,5 @@
 'finals_game_dates', (231936, 121)
 'selected_year', (232448, 19)
 'scoreboard_cache', (232960, 56)
+'finals_roster_cache', (233984, 1772)
+'player_cache', (8199168, 299463)

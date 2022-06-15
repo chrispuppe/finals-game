@@ -1,7 +1,4 @@
-# https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/
 from __init__ import db
-# from flask import Flask
-# from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from flask_login import UserMixin
 

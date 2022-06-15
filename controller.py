@@ -189,18 +189,15 @@ def get_finals_players(team1, team2):
                     ]
     return finals_players
 
+
 def finals_roster():
     team1 = finals_team_1()
     team2 = finals_team_2()
     roster = get_finals_players(team1, team2)
     return roster
 
-# def update_finals_roster():
-#     finals_roster = get_finals_players(finals_team_1(), finals_team_2())
 
 def scoreboard():
-    # return scoreboard_cache['scoreboard_save']
-
     if scoreboard_cache['current_timestamp'] == None or time.time() - scoreboard_cache['current_timestamp'] > 120:
         user_choices = all_user_selections()
         game_data = []
@@ -256,10 +253,3 @@ if __name__ == "__main__":
     # print(teams)
     print(get_player_finals_stats('Stephen Curry'))
     print(get_player_finals_stats('Stephen Curry'))
-
-    # initial var file setup
-    # with shelve.open('./vars_persist/vars', 'c') as shelf:
-    #     shelf['finals_team_1'] = 'Golden State Warriors'
-    #     shelf['finals_team_2'] = 'Boston Celtics'
-    #     shelf['all_teams'] = teams
-    #     shelf['player_dict'] = player_dict

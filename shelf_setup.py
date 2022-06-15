@@ -16,12 +16,23 @@ scoreboard_cache = {
     'current_timestamp': None
 }
 
+finals_roster_cache = {
+    'finals_roster_save': None,
+    'current_timestamp': None
+}
+
+
 with shelve.open('./vars_persist/vars', 'c') as shelf:
     # shelf['finals_game_dates'] = finals_game_dates
     # shelf['selected_year'] = selected_year
     # shelf['scoreboard_cache'] = scoreboard_cache
     # shelf['finals_team_1'] = 'Golden State Warriors'
     # shelf['finals_team_2'] = 'Boston Celtics'
-    print(shelf['finals_team_1'], shelf['finals_team_2'])
+    # shelf['finals_roster_cache'] = finals_roster_cache
+    print(shelf['player_cache'])
 
-shelf.close()
+    # print(shelf['finals_roster_cache'])
+    # for key in shelf.keys():
+    #     print(repr(key), repr(shelf[key]))
+
+    shelf.close()
