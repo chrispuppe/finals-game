@@ -30,6 +30,7 @@ def home():
                             updated_scoreboard=updated_scoreboard,
                             )
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -48,12 +49,12 @@ def login():
     return render_template('login.html', form=form)
 
 
-
 @app.route("/logout", methods=['GET'])
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
 
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required
@@ -70,7 +71,6 @@ def admin():
                                 game_dates=game_dates,
                                 updated_scoreboard=updated_scoreboard
                                 )
-    
     if request.method == 'POST':
         new_selection = Selection(
                                     id=request.form['user'],
@@ -82,6 +82,7 @@ def admin():
         clear_scoreboard_cache()
         return redirect(url_for('admin'))
 
+
 @app.route('/delete-selection/<int:id>', methods= ['GET', 'POST'])
 def delete_selection(id):
     delete_selection = Selection.query.get(id)
@@ -89,6 +90,7 @@ def delete_selection(id):
     db.session.commit()
     clear_scoreboard_cache()
     return redirect(url_for('admin'))
+
 
 @app.route('/select-teams', methods=['GET', 'POST'])
 def team_selection():
@@ -110,13 +112,6 @@ def team_selection():
             print(shelf['finals_team_1'], shelf['finals_team_2'])
         return(redirect(url_for('admin')))
 
-@app.route('/select-dates')
-def date_selection():
-    pass
-
-@app.route('/user-order')
-def user_order():
-    pass
 
 if __name__ == '__main__':
     app.run()
